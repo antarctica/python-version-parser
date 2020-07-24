@@ -27,10 +27,13 @@ RUN poetry install --no-root --no-interaction --no-ansi
 
 FROM base as run
 
+ENV APPPATH=/usr/src/app/
 ENV APPVENV=/usr/local/virtualenvs/python_version_parser
 ENV PATH="$APPVENV/bin:$PATH"
 
 COPY --from=build $APPVENV/ $APPVENV/
+COPY entrypoint.sh $APPPATH/
+COPY python_version_parser/ $APPPATH/python_version_parser/
 
 ENTRYPOINT ["python"]
 CMD [ "python_version_parser" ]
