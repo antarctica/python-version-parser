@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* GitLab CI usage instructions
+
+## [0.2.0] - 2020-07-24
+
+### Added
+
 * Adding application to image
 * Adding entrypoint script
 * Adding test of script to CI

@@ -13,13 +13,51 @@ complaint version string (e.g. `0.3.0` or `0.3.0.post5.dev0`). Versions are expe
 
 ## Usage
 
-```
-python python_version_helper $(git describe --tags)
-```
+To use, mount a directory containing a Git repository into a container and start a shell, then run:
 
-Where: `$(git describe --tags)` is the output of `git describe --tags`.
+```
+$ cd /path/to/mounted/directory/containing/git/repository
+$ python /usr/src/app/python_version_parser $(git describe --tags)
+```
 
 The generated version string will be written to *stdout*. If any errors occur they will be written to *stderr*.
+
+To use in GitLab CI:
+
+```yml
+---
+
+stages:
+  - 💥 setup
+  - 🏗 build
+
+version:
+  stage: 💥 setup
+  image:
+    name: docker-registry.data.bas.ac.uk/magic/infrastructure/python-version-parser:latest
+    entrypoint: [""]
+  before_script:
+    - "python3 /usr/src/app/python_version_parser $(git describe --tags) > _version && export VERSION=$(cat _version)"
+    - "export VERSION=${VERSION:-0.0.0}"
+  script:
+    - 'echo $VERSION'
+    - 'echo "VERSION=$VERSION" >> build.env'
+  needs: []
+  artifacts:
+    reports:
+      dotenv: build.env
+
+use-version:
+  stage: 🏗 build
+  image:
+    name: alpine:latest
+    entrypoint: [""]
+  script:
+    - 'echo $VERSION'
+  needs:
+    - job: version
+      artifacts: true
+```
 
 Where a commit is a tagged version (e.g. a final release) the version is the same as the tag minus its prefix:
 
