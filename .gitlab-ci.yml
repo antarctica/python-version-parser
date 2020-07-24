@@ -1,0 +1,44 @@
+---
+
+# == Notes ==
+
+# GitLab automatically passes artifacts from previous stages by default
+
+# This CI definition uses a GitLab provided include template
+
+# == Includes ==
+
+include:
+  - template: 'Workflows/MergeRequest-Pipelines.gitlab-ci.yml'
+
+# == Global settings ==
+
+stages:
+  - 🧪 test
+
+variables:
+  APP_NAME: python-version-parser
+
+image:
+  name: docker-registry.data.bas.ac.uk/magic/infrastructure/python-version-parser:latest
+  entrypoint: [""]
+
+# == Jobs ==
+
+black:
+  stage: 🧪 test
+  script:
+    - "black --check python_version_parser/"
+  needs: []
+  rules:
+    - changes:
+      - '**/*.py'
+
+bandit:
+  stage: 🧪 test
+  script:
+    - "bandit -r ."
+  needs: []
+  rules:
+    - changes:
+      - '**/*.py'

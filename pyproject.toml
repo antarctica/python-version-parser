@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "python-version-parser"
+version = "0.0.0"
+license = "OGL-UK-3.0"
+description = "Script to generate a PEP 440 (Post) version from git-describe output"
+authors = [
+    "Felix Fennell <felnne@bas.ac.uk>"
+]
+readme = "README.md"
+homepage = "https://github.com/antarctica/python-version-parser"
+repository = "https://github.com/antarctica/python-version-parser"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.6",
+    "Topic :: Software Development :: Build Tools"
+]
+
+packages = [
+    {include = "python_version_parser"},
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+bandit = "^1.6.2"
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = ''
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"

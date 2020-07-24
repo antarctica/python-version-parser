@@ -1,0 +1,9 @@
+---
+  version: "2"
+
+  services:
+    app:
+      build: .
+      image: docker-registry.data.bas.ac.uk/magic/infrastructure/python-version-parser:latest
+      volumes:
+        - .:/usr/src/app
