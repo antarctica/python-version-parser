@@ -42,3 +42,9 @@ bandit:
   rules:
     - changes:
       - '**/*.py'
+
+test:
+  stage: 🧪 test
+  script:
+    - "ash /usr/src/app/entrypoint.sh"
+  needs: []

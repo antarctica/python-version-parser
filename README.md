@@ -14,7 +14,7 @@ complaint version string (e.g. `0.3.0` or `0.3.0.post5.dev0`). Versions are expe
 ## Usage
 
 ```
-python python_version_helper.py $(git describe --tags)
+python python_version_helper $(git describe --tags)
 ```
 
 Where: `$(git describe --tags)` is the output of `git describe --tags`.

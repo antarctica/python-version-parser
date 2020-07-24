@@ -35,5 +35,5 @@ COPY --from=build $APPVENV/ $APPVENV/
 COPY entrypoint.sh $APPPATH/
 COPY python_version_parser/ $APPPATH/python_version_parser/
 
-ENTRYPOINT ["python"]
-CMD [ "python_version_parser" ]
+ENTRYPOINT ["ash"]
+CMD [ "/usr/src/app/entrypoint.sh" ]
